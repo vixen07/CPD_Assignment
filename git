@@ -3,7 +3,7 @@
 # Check if a message is provided as an argument
 if [ -z "$1" ]; then
   # If no argument is provided, use current date and time as the commit message
-  COMMIT_MESSAGE="Commit on $(date)"
+  COMMIT_MESSAGE="Commit on"
 else
   # If an argument is provided, use it as the commit message
   COMMIT_MESSAGE="$1"
