@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "518879996311",
+    "project_id": "studyspot-d25fb",
+    "storage_bucket": "studyspot-d25fb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:518879996311:android:30255ac909ac58460bfcd2",
+        "android_client_info": {
+          "package_name": "org.mk.cpdassignment"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhHrsxgv9bm2rxr7G2GVj82mkrmB638VU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
