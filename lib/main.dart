@@ -1,3 +1,4 @@
+import 'package:cpdassignment/src/features/auth/screens/onboarding.dart';
 import 'package:cpdassignment/src/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -39,37 +40,16 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           defaultTransition: Transition.fade,
           // You can define initial routes here
-          initialRoute: '/',
+          initialRoute: '/onboarding',
           getPages: [
             GetPage(
-              name: '/',
-              page: () => HomeScreen(),
+              name: '/onboarding',
+              page: () => Onboarding(),
             ),
             // Add more routes as needed
           ],
         );
       },
-    );
-  }
-}
-
-// Example Home Screen
-class HomeScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'StudySpot',
-          style: TextStyle(fontSize: 18.sp),
-        ),
-      ),
-      body: Center(
-        child: Text(
-          'Welcome to StudySpot!',
-          style: TextStyle(fontSize: 16.sp),
-        ),
-      ),
     );
   }
 }
