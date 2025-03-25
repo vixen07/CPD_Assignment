@@ -10,7 +10,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Get the AuthController instance
-    final AuthController controller = Get.find<AuthController>();
+    final AuthController controller = Get.put(AuthController());
     
     return Scaffold(
       backgroundColor: Colors.white,
@@ -25,15 +25,7 @@ class LoginScreen extends StatelessWidget {
                   children: [
                     SizedBox(height: 40.h),
                     
-                    // App logo
-                    Center(
-                      child: Image.asset(
-                        'assets/images/logo.png',
-                        height: 120.h,
-                        width: 120.w,
-                      ),
-                    ),
-                    
+            
                     SizedBox(height: 20.h),
                     
                     // Welcome text
@@ -154,11 +146,8 @@ class LoginScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        _buildSocialButton('assets/images/google.png'),
-                        SizedBox(width: 24.w),
-                        _buildSocialButton('assets/images/facebook.png'),
-                        SizedBox(width: 24.w),
-                        _buildSocialButton('assets/images/apple.png'),
+                        _buildSocialButton('assets/images/icons8-google-48.png'),
+               
                       ],
                     ),
                     

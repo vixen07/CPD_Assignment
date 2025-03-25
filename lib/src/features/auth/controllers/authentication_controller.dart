@@ -18,6 +18,9 @@ class AuthController extends GetxController {
   final isPasswordVisible = false.obs;
   final isConfirmPasswordVisible = false.obs;
   final rememberMe = false.obs;
+
+  RxBool isPasswordHidden = true.obs;
+  RxBool isConfirmPasswordHidden = true.obs;
   
   // Form validation observables
   final emailError = Rx<String?>(null);

@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+
+class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +14,14 @@ class LoginScreen extends StatelessWidget {
     
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.grey[800]),
+          onPressed: () => Get.back(),
+        ),
+      ),
       body: SafeArea(
         child: Obx(() => controller.isLoading.value 
           ? const Center(child: CircularProgressIndicator()) 
@@ -22,22 +31,11 @@ class LoginScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 40.h),
-                    
-                    // App logo
-                    Center(
-                      child: Image.asset(
-                        'assets/images/logo.png',
-                        height: 120.h,
-                        width: 120.w,
-                      ),
-                    ),
-                    
                     SizedBox(height: 20.h),
                     
-                    // Welcome text
+                    // Create account text
                     Text(
-                      'Welcome Back!',
+                      'Create Account',
                       style: TextStyle(
                         fontSize: 28.sp,
                         fontWeight: FontWeight.bold,
@@ -48,75 +46,87 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(height: 8.h),
                     
                     Text(
-                      'Sign in to continue',
+                      'Please fill in the form to continue',
                       style: TextStyle(
                         fontSize: 16.sp,
                         color: Colors.grey[600],
                       ),
                     ),
                     
-                    SizedBox(height: 40.h),
+                    SizedBox(height: 32.h),
+                    
+                    // Full name field
+                    _buildNameField(controller),
+                    
+                    SizedBox(height: 20.h),
                     
                     // Email field
                     _buildEmailField(controller),
                     
                     SizedBox(height: 20.h),
                     
-                    // Password field with toggle visibility
+                    // Password field
                     _buildPasswordField(controller),
                     
-                    SizedBox(height: 16.h),
+                    SizedBox(height: 20.h),
                     
-                    // Remember me and forgot password row
+                    // Confirm password field
+                    _buildConfirmPasswordField(controller),
+                    
+                    SizedBox(height: 32.h),
+                    
+                    // Terms and conditions check
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        // Remember me checkbox
-                        Obx(() => Row(
-                          children: [
-                            SizedBox(
-                              height: 24.w,
-                              width: 24.w,
-                              child: Checkbox(
-                                value: controller.rememberMe.value,
-                                onChanged: (_) => controller.toggleRememberMe(),
-                                activeColor: Theme.of(context).primaryColor,
-                              ),
-                            ),
-                            SizedBox(width: 8.w),
-                            Text(
-                              'Remember me',
+                        SizedBox(
+                          height: 24.w,
+                          width: 24.w,
+                          child: Checkbox(
+                            value: true,
+                            onChanged: (_) {},
+                            activeColor: Theme.of(context).primaryColor,
+                          ),
+                        ),
+                        SizedBox(width: 8.w),
+                        Expanded(
+                          child: RichText(
+                            text: TextSpan(
+                              text: 'By creating an account, you agree to our ',
                               style: TextStyle(
                                 fontSize: 14.sp,
                                 color: Colors.grey[700],
                               ),
-                            ),
-                          ],
-                        )),
-                        
-                        // Forgot password button
-                        TextButton(
-                          onPressed: controller.goToForgotPassword,
-                          child: Text(
-                            'Forgot Password?',
-                            style: TextStyle(
-                              fontSize: 14.sp,
-                              color: Theme.of(context).primaryColor,
-                              fontWeight: FontWeight.w600,
+                              children: [
+                                TextSpan(
+                                  text: 'Terms & Conditions',
+                                  style: TextStyle(
+                                    color: Theme.of(context).primaryColor,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                TextSpan(text: ' and '),
+                                TextSpan(
+                                  text: 'Privacy Policy',
+                                  style: TextStyle(
+                                    color: Theme.of(context).primaryColor,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
                       ],
                     ),
                     
-                    SizedBox(height: 40.h),
+                    SizedBox(height: 32.h),
                     
-                    // Sign in button
+                    // Sign up button
                     SizedBox(
                       width: double.infinity,
                       height: 55.h,
                       child: ElevatedButton(
-                        onPressed: controller.login,
+                        onPressed: controller.register,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Theme.of(context).primaryColor,
                           shape: RoundedRectangleBorder(
@@ -124,7 +134,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                         child: Text(
-                          'Sign In',
+                          'Sign Up',
                           style: TextStyle(
                             fontSize: 18.sp,
                             fontWeight: FontWeight.bold,
@@ -136,10 +146,10 @@ class LoginScreen extends StatelessWidget {
                     
                     SizedBox(height: 24.h),
                     
-                    // Social login options
+                    // Or sign up with text
                     Center(
                       child: Text(
-                        'Or sign in with',
+                        'Or sign up with',
                         style: TextStyle(
                           fontSize: 14.sp,
                           color: Colors.grey[600],
@@ -149,35 +159,32 @@ class LoginScreen extends StatelessWidget {
                     
                     SizedBox(height: 24.h),
                     
-                    // Social login buttons
+                    // Social signup buttons
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        _buildSocialButton('assets/images/google.png'),
-                        SizedBox(width: 24.w),
-                        _buildSocialButton('assets/images/facebook.png'),
-                        SizedBox(width: 24.w),
-                        _buildSocialButton('assets/images/apple.png'),
+                        _buildSocialButton('assets/images/icons8-google-48.png'),
+                       
                       ],
                     ),
                     
                     SizedBox(height: 40.h),
                     
-                    // Sign up row
+                    // Already have an account row
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Don\'t have an account?',
+                          'Already have an account?',
                           style: TextStyle(
                             fontSize: 16.sp,
                             color: Colors.grey[700],
                           ),
                         ),
                         TextButton(
-                          onPressed: controller.goToRegister,
+                          onPressed: () => Get.back(),
                           child: Text(
-                            'Sign Up',
+                            'Sign In',
                             style: TextStyle(
                               fontSize: 16.sp,
                               fontWeight: FontWeight.bold,
@@ -198,115 +205,53 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-
-// Password field with toggle visibility button
-Widget _buildPasswordField(AuthController controller) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      // Label for the password field
-      Text(
-        'Password',
-        style: TextStyle(
-          fontSize: 16.sp,
-          fontWeight: FontWeight.w600,
-          color: Colors.grey[800],
-        ),
-      ),
-      SizedBox(height: 8.h),
-      
-      // Password input field with visibility toggle
-      Obx(() => TextFormField(
-        controller: controller.passwordController,
-        obscureText: !controller.isPasswordVisible.value,
-        decoration: InputDecoration(
-          hintText: 'Enter your password',
-          
-          // Lock icon at the start of the field
-          prefixIcon: Icon(
-            Icons.lock_outline, 
-            color: Colors.grey[600],
+  // Full name field widget
+  Widget _buildNameField(AuthController controller) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Full Name',
+          style: TextStyle(
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w600,
+            color: Colors.grey[800],
           ),
-          
-          // Visibility toggle icon at the end of the field
-          suffixIcon: IconButton(
-            icon: Icon(
-              // Change icon based on password visibility state
-              controller.isPasswordVisible.value 
-                  ? Icons.visibility 
-                  : Icons.visibility_off,
-              color: Colors.grey[600],
+        ),
+        SizedBox(height: 8.h),
+        TextFormField(
+          controller: controller.nameController,
+          keyboardType: TextInputType.name,
+          textCapitalization: TextCapitalization.words,
+          decoration: InputDecoration(
+            hintText: 'Enter your full name',
+            prefixIcon: Icon(Icons.person_outline, color: Colors.grey[600]),
+            contentPadding: EdgeInsets.symmetric(vertical: 16.h),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12.r),
+              borderSide: BorderSide(color: Colors.grey[300]!),
             ),
-            onPressed: controller.togglePasswordVisibility,
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12.r),
+              borderSide: BorderSide(color: Colors.grey[300]!),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12.r),
+              borderSide: BorderSide(color: Get.theme.primaryColor),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12.r),
+              borderSide: BorderSide(color: Colors.red),
+            ),
+            errorText: controller.nameError.value,
           ),
-          
-          // Consistent padding for the text field
-          contentPadding: EdgeInsets.symmetric(vertical: 16.h),
-          
-          // Border styling for different states
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12.r),
-            borderSide: BorderSide(color: Colors.grey[300]!),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12.r),
-            borderSide: BorderSide(color: Colors.grey[300]!),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12.r),
-            borderSide: BorderSide(color: Get.theme.primaryColor),
-          ),
-          errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12.r),
-            borderSide: BorderSide(color: Colors.red),
-          ),
-          
-          // Display validation error message if there is one
-          errorText: controller.passwordError.value,
+          onChanged: (_) => controller.validateName(),
         ),
-        
-        // Validate the password whenever it changes
-        onChanged: (_) => controller.validatePassword(),
-      )),
-    ],
-  );
-}
-
-
-  Widget _buildSocialButton(String imagePath) {
-  return InkWell(
-    onTap: () {
-      // Implement social login functionality here
-      // For example: controller.signInWithGoogle();
-    },
-    child: Container(
-      width: 60.w,
-      height: 60.w,
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey[300]!),
-        borderRadius: BorderRadius.circular(16.r),
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 1,
-            blurRadius: 3,
-            offset: const Offset(0, 1),
-          ),
-        ],
-      ),
-      child: Center(
-        child: Image.asset(
-          imagePath,
-          height: 30.h,
-          width: 30.w,
-          fit: BoxFit.contain,
-        ),
-      ),
-    ),
-  );
-}
-  // Email field widget with validation
+      ],
+    );
+  }
+  
+  // Email field widget
   Widget _buildEmailField(AuthController controller) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -349,4 +294,128 @@ Widget _buildPasswordField(AuthController controller) {
         ),
       ],
     );
-  }}
+  }
+
+  // Password field widget
+  Widget _buildPasswordField(AuthController controller) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Password',
+          style: TextStyle(
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w600,
+            color: Colors.grey[800],
+          ),
+        ),
+        SizedBox(height: 8.h),
+        Obx(() => TextFormField(
+              controller: controller.passwordController,
+              obscureText: controller.isPasswordHidden.value,
+              decoration: InputDecoration(
+                hintText: 'Enter your password',
+                prefixIcon: Icon(Icons.lock_outline, color: Colors.grey[600]),
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    controller.isPasswordHidden.value
+                        ? Icons.visibility_off
+                        : Icons.visibility,
+                    color: Colors.grey[600],
+                  ),
+                  onPressed: controller.togglePasswordVisibility,
+                ),
+                contentPadding: EdgeInsets.symmetric(vertical: 16.h),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12.r),
+                  borderSide: BorderSide(color: Colors.grey[300]!),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12.r),
+                  borderSide: BorderSide(color: Colors.grey[300]!),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12.r),
+                  borderSide: BorderSide(color: Get.theme.primaryColor),
+                ),
+                errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12.r),
+                  borderSide: BorderSide(color: Colors.red),
+                ),
+                errorText: controller.passwordError.value,
+              ),
+              onChanged: (_) => controller.validatePassword(),
+            )),
+      ],
+    );
+  }
+
+  // Confirm Password field widget
+  Widget _buildConfirmPasswordField(AuthController controller) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Confirm Password',
+          style: TextStyle(
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w600,
+            color: Colors.grey[800],
+          ),
+        ),
+        SizedBox(height: 8.h),
+        Obx(() => TextFormField(
+              controller: controller.confirmPasswordController,
+              obscureText: controller.isConfirmPasswordHidden.value,
+              decoration: InputDecoration(
+                hintText: 'Confirm your password',
+                prefixIcon: Icon(Icons.lock_outline, color: Colors.grey[600]),
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    controller.isConfirmPasswordHidden.value
+                        ? Icons.visibility_off
+                        : Icons.visibility,
+                    color: Colors.grey[600],
+                  ),
+                  onPressed: controller.toggleConfirmPasswordVisibility,
+                ),
+                contentPadding: EdgeInsets.symmetric(vertical: 16.h),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12.r),
+                  borderSide: BorderSide(color: Colors.grey[300]!),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12.r),
+                  borderSide: BorderSide(color: Colors.grey[300]!),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12.r),
+                  borderSide: BorderSide(color: Get.theme.primaryColor),
+                ),
+                errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12.r),
+                  borderSide: BorderSide(color: Colors.red),
+                ),
+                errorText: controller.confirmPasswordError.value,
+              ),
+              onChanged: (_) => controller.validateConfirmPassword(),
+            )),
+      ],
+    );
+  }
+
+  // Social sign-up button widget
+  Widget _buildSocialButton(String assetPath) {
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        padding: EdgeInsets.all(12.w),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey[300]!),
+          borderRadius: BorderRadius.circular(12.r),
+        ),
+        child: Image.asset(assetPath, height: 32.h, width: 32.w),
+      ),
+    );
+  }
+}
