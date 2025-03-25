@@ -11,12 +11,15 @@ fi
 
 # Execute git commands
 git add .
-git commit -m "feat: Implement comprehensive onboarding experience
+git commit -m "docs: Add comprehensive project README
 
-- Add multi-page onboarding flow with smooth transitions
-- Create dedicated OnboardingController using GetX for state management
-- Implement responsive design with ScreenUtil
-- Add visual indicators and intuitive navigation controls
-- Integrate GetStorage for persisting onboarding completion status
-- Design engaging UI with instructional content for key app features"
+- Document application features and core functionality
+- Explain project structure and technical architecture
+- Include detailed setup instructions and prerequisites
+- List key dependencies with their purposes
+- Provide development guidelines and coding standards
+- Outline future enhancement possibilities
+- Add project overview and contributor information
+
+This README serves as the primary documentation for getting started with the StudySpot application and understanding its architecture."
 git push
