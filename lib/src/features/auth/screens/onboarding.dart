@@ -13,6 +13,8 @@ class Onboarding extends StatelessWidget {
   Widget build(BuildContext context) {
     // Initialize and register the controller
     final controller = Get.put(OnboardingController());
+   final pagecontroller = PageController(viewportFraction: 0.8, keepPage: true);
+
     
     return Scaffold(
       backgroundColor: Colors.white,
@@ -39,25 +41,25 @@ class Onboarding extends StatelessWidget {
             
             // Page content
             PageView(
-              controller: controller.pageController,
+              controller: controller.controller,
               onPageChanged: controller.updatePageIndex,
               children: [
                 OnboardingWidget(
-                  image: 'assets/images/find_study_spot.png',
+                  image: 'assets/images/undraw_online-reading_jtnx.png',
                   title: 'Find Perfect Study Spots',
                   description:
                       'Discover quiet libraries, cozy cafes, and dedicated study spaces near you. Filter by amenities, noise level, and more.',
                   backgroundColor: Colors.blue[50]!,
                 ),
                 OnboardingWidget(
-                  image: 'assets/images/book_space.png',
+                  image: 'assets/images/undraw_urban-design_tz8n.png',
                   title: 'Reserve Your Space',
                   description:
                       'Book study rooms and spaces in advance. Never worry about finding a place during exam season again.',
                   backgroundColor: Colors.green[50]!,
                 ),
                 OnboardingWidget(
-                  image: 'assets/images/collaborate.png',
+                  image: 'assets/images/undraw_connecting-teams_nnjy.png',
                   title: 'Connect With Study Buddies',
                   description:
                       'Find and join study groups in your area or create your own. Collaborate and learn together.',
@@ -74,17 +76,7 @@ class Onboarding extends StatelessWidget {
               child: Column(
                 children: [
                   // Page indicator
-                  Obx(() => SmoothPageIndicator(
-                        controller: controller.pageController,
-                        count: 3,
-                        effect: WormEffect(
-                          dotHeight: 10.h,
-                          dotWidth: 10.w,
-                          activeDotColor: Theme.of(context).primaryColor,
-                          dotColor: Colors.grey.shade300,
-                        ),
-                      )),
-                  SizedBox(height: 50.h),
+               SizedBox(height: 50.h),
                   
                   // Next/Get Started button
                   Padding(

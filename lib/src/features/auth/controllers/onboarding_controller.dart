@@ -1,17 +1,19 @@
+
+
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardingController extends GetxController {
-  final pageController = PageController();
+   final controller = PageController(viewportFraction: 0.8, keepPage: true);
   final currentPage = 0.obs;
   final storage = GetStorage();
   final isLastPage = false.obs;
 
   @override
   void onClose() {
-    pageController.dispose();
+    controller.dispose();
     super.onClose();
   }
 
@@ -24,7 +26,7 @@ class OnboardingController extends GetxController {
     if (isLastPage.value) {
       completeOnboarding();
     } else {
-      pageController.nextPage(
+      controller.nextPage(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );

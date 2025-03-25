@@ -11,15 +11,18 @@ fi
 
 # Execute git commands
 git add .
-git commit -m "docs: Add comprehensive project README
+git commit -m "feat: Add comprehensive authentication UI with GetX integration
 
-- Document application features and core functionality
-- Explain project structure and technical architecture
-- Include detailed setup instructions and prerequisites
-- List key dependencies with their purposes
-- Provide development guidelines and coding standards
-- Outline future enhancement possibilities
-- Add project overview and contributor information
-
-This README serves as the primary documentation for getting started with the StudySpot application and understanding its architecture."
+- Create LoginScreen with email/password fields, social login options, and remember me functionality
+- Implement RegisterScreen with complete user registration form and validation
+- Develop AuthController using GetX for state management, form validation, and Firebase integration
+- Add password visibility toggle for improved user experience
+- Implement social login buttons with consistent styling
+- Create responsive form fields with proper validation feedback
+- Add navigation between authentication screens
+- Implement remember me functionality with GetStorage integration
+- Include proper loading states during authentication processes
+- Add form validation with real-time feedback"
 git push
+
+# 409434

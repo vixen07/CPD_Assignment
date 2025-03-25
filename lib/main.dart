@@ -1,4 +1,6 @@
+import 'package:cpdassignment/src/features/auth/screens/login.dart';
 import 'package:cpdassignment/src/features/auth/screens/onboarding.dart';
+import 'package:cpdassignment/src/features/auth/screens/register_screen.dart';
 import 'package:cpdassignment/src/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -45,6 +47,15 @@ class MyApp extends StatelessWidget {
             GetPage(
               name: '/onboarding',
               page: () => Onboarding(),
+            ),
+            GetPage(
+              name: '/login',
+              page: () => LoginScreen(),
+            ),
+
+            GetPage(
+              name: '/register',
+              page: () => RegisterScreen(),
             ),
             // Add more routes as needed
           ],
