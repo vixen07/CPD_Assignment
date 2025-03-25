@@ -11,5 +11,12 @@ fi
 
 # Execute git commands
 git add .
-git commit -m "$COMMIT_MESSAGE"
+git commit -m "feat: Implement comprehensive onboarding experience
+
+- Add multi-page onboarding flow with smooth transitions
+- Create dedicated OnboardingController using GetX for state management
+- Implement responsive design with ScreenUtil
+- Add visual indicators and intuitive navigation controls
+- Integrate GetStorage for persisting onboarding completion status
+- Design engaging UI with instructional content for key app features"
 git push
