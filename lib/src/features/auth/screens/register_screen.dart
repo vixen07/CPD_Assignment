@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -199,6 +198,7 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
+
 // Password field with toggle visibility button
 Widget _buildPasswordField(AuthController controller) {
   return Column(
@@ -272,8 +272,8 @@ Widget _buildPasswordField(AuthController controller) {
   );
 }
 
-  // Social login button with icon
-Widget _buildSocialButton(String imagePath) {
+
+  Widget _buildSocialButton(String imagePath) {
   return InkWell(
     onTap: () {
       // Implement social login functionality here
