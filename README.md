@@ -8,8 +8,7 @@ StudySpot is a Flutter application designed to help students and professionals f
 
 ### Core Functionality
 - **Study Spot Discovery**: Find libraries, cafes, and dedicated study spaces filtered by amenities and preferences
-- **Space Reservation**: Book study rooms and spaces in advance to ensure availability
-- **Study Group Collaboration**: Connect with study buddies, join or create study groups
+- **Space Search**: Search study rooms and spaces in advance to ensure availability
 
 ### Technical Features
 - **Responsive UI**: Fully responsive design that adapts to different screen sizes using Flutter ScreenUtil
