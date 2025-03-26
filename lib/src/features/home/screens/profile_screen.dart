@@ -75,11 +75,11 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
                 
-                Divider(height: 32.h),
+                // Divider(height: 32.h),
                 
                 // Account section
                 _buildSection(
-                  title: 'Account',
+                  title: '',
                   items: [
                     {
                       'icon': Icons.favorite,
@@ -87,59 +87,29 @@ class ProfileScreen extends StatelessWidget {
                       'subtitle': 'View your favorite study spots',
                       'onTap': controller.navigateToFavorites,
                     },
-                    {
-                      'icon': Icons.history,
-                      'title': 'Activity History',
-                      'subtitle': 'View your recent activity',
-                      'onTap': controller.navigateToHistory,
-                    },
-                    {
-                      'icon': Icons.star,
-                      'title': 'My Reviews',
-                      'subtitle': 'Manage your reviews',
-                      'onTap': controller.navigateToReviews,
-                    },
-                    {
-                      'icon': Icons.add_business,
-                      'title': 'My Study Spots',
-                      'subtitle': 'Manage spots you\'ve added',
-                      'onTap': controller.navigateToMySpots,
-                    },
+                    // {
+                    //   'icon': Icons.history,
+                    //   'title': 'Activity History',
+                    //   'subtitle': 'View your recent activity',
+                    //   'onTap': controller.navigateToHistory,
+                    // },
+                    // {
+                    //   'icon': Icons.star,
+                    //   'title': 'My Reviews',
+                    //   'subtitle': 'Manage your reviews',
+                    //   'onTap': controller.navigateToReviews,
+                    // },
+                    // {
+                    //   'icon': Icons.add_business,
+                    //   'title': 'My Study Spots',
+                    //   'subtitle': 'Manage spots you\'ve added',
+                    //   'onTap': controller.navigateToMySpots,
+                    // },
                   ],
                 ),
                 
                 SizedBox(height: 16.h),
-                
-                // Settings section
-                _buildSection(
-                  title: 'Settings',
-                  items: [
-                    {
-                      'icon': Icons.notifications,
-                      'title': 'Notifications',
-                      'subtitle': 'Manage notification preferences',
-                      'onTap': controller.navigateToNotifications,
-                    },
-                    {
-                      'icon': Icons.privacy_tip,
-                      'title': 'Privacy',
-                      'subtitle': 'Manage privacy settings',
-                      'onTap': controller.navigateToPrivacy,
-                    },
-                    {
-                      'icon': Icons.help,
-                      'title': 'Help & Support',
-                      'subtitle': 'Get assistance and FAQ',
-                      'onTap': controller.navigateToHelp,
-                    },
-                    {
-                      'icon': Icons.info,
-                      'title': 'About',
-                      'subtitle': 'App information and terms',
-                      'onTap': controller.navigateToAbout,
-                    },
-                  ],
-                ),
+              
                 
                 SizedBox(height: 24.h),
                 

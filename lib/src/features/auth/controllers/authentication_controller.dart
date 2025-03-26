@@ -1,3 +1,4 @@
+import 'package:cpdassignment/src/utils/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -5,6 +6,11 @@ import 'package:get_storage/get_storage.dart';
 
 class AuthController extends GetxController {
   // Firebase auth instance
+
+
+ 
+
+
   final FirebaseAuth _auth = FirebaseAuth.instance;
   
   // Form controllers
@@ -148,38 +154,54 @@ class AuthController extends GetxController {
   }
   
   // Login with email and password
-  Future<void> login() async {
-    if (!validateLoginForm()) return;
-    
-    try {
-      isLoading.value = true;
-      
-      await _auth.signInWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text,
-      );
+Future<bool> login({
+  String? email,
+  String? password,
+}) async {
+  if (!validateLoginForm()) return false; // If the form is invalid, return false
 
-      // Save credentials if remember me is checked
-      saveCredentials();
-      
-      // Navigate to home screen on successful login
-      Get.offAllNamed('/home');
-      
-    } on FirebaseAuthException catch (e) {
-      // Handle specific Firebase auth errors
-      if (e.code == 'user-not-found') {
-        Get.snackbar('Error', 'No user found with this email');
-      } else if (e.code == 'wrong-password') {
-        Get.snackbar('Error', 'Incorrect password');
-      } else {
-        Get.snackbar('Error', 'Login failed: ${e.message}');
-      }
-    } catch (e) {
-      Get.snackbar('Error', 'An unexpected error occurred');
-    } finally {
-      isLoading.value = false;
-    }
+  // If email or password is null, fall back to using the text controllers
+  if (email == null || password == null) {
+    email = emailController.text.trim();
+    password = passwordController.text;
   }
+
+  try {
+    isLoading.value = true;
+
+    // Perform the sign-in operation
+    final user = await _auth.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+
+    // If login is successful (user is not null)
+    if (user != null) {
+      saveCredentials(); // Save credentials if needed
+      Get.offAllNamed('/home'); // Navigate to home screen
+      return true; // Return true if login is successful
+    } else {
+      return false; // Return false if user is null
+    }
+  } on FirebaseAuthException catch (e) {
+    // Handle specific Firebase auth errors
+    if (e.code == 'user-not-found') {
+      Get.snackbar('Error', 'No user found with this email');
+    } else if (e.code == 'wrong-password') {
+      Get.snackbar('Error', 'Incorrect password');
+    } else {
+      Get.snackbar('Error', 'Login failed: ${e.message}');
+    }
+    return false; // Return false on authentication error
+  } catch (e) {
+    print('Error: $e');
+    Get.snackbar('Error', 'An unexpected error occurred');
+    return false; // Return false for any other errors
+  } finally {
+    isLoading.value = false; // Ensure isLoading is set to false in all cases
+  }
+}
+
   
   // Register with email and password
   Future<void> register() async {

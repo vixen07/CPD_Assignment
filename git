@@ -11,19 +11,12 @@ fi
 
 # Execute git commands
 git add .
-git commit -m "feat: Integrate Google Maps functionality
+git commit -m "Add default and named constructors to AuthController for flexible initialization
 
-- Add Google Maps Flutter dependency
-- Configure API keys and permissions for Android and iOS
-- Implement map view with custom study spot markers
-- Add user location tracking functionality
-- Set up camera position controls and zoom features
-- Create custom map marker info windows
-- Handle location permissions and service availability
-- Add fallback for location services not available
-- Document map integration process
-
-This commit enables the core map-based functionality for the StudySpot app, allowing users to visually browse study locations on an interactive map and see their own position relative to available study spots."
+- Added default constructor to initialize AuthService internally.
+- Added named constructor to allow injecting custom AuthService instance.
+- Enables flexible controller instantiation via Get.put().
+"
 git push
 
 # 409434
