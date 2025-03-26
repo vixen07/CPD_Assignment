@@ -11,22 +11,19 @@ fi
 
 # Execute git commands
 git add .
-git commit -m "feat: Complete StudySpot app implementation
+git commit -m "feat: Integrate Google Maps functionality
 
-- Build comprehensive authentication system with login, registration, and profile management
-- Implement Google Maps integration with custom markers for study locations
-- Create interactive spot detail screen with booking and review capabilities
-- Add like and bookmark functionality with local storage persistence
-- Develop search screen with advanced filtering and sorting options
-- Build profile management with user settings and preferences
-- Add onboarding experience for first-time users
-- Implement animated splash screen with navigation logic
-- Create add spot form for user-generated content
-- Set up Firebase integration for authentication, storage, and database
-- Configure GetX for state management and dependency injection
-- Implement responsive UI with ScreenUtil
+- Add Google Maps Flutter dependency
+- Configure API keys and permissions for Android and iOS
+- Implement map view with custom study spot markers
+- Add user location tracking functionality
+- Set up camera position controls and zoom features
+- Create custom map marker info windows
+- Handle location permissions and service availability
+- Add fallback for location services not available
+- Document map integration process
 
-This commit provides a complete implementation of the StudySpot application, allowing users to discover, search, and bookmark study locations based on their preferences and current location."
+This commit enables the core map-based functionality for the StudySpot app, allowing users to visually browse study locations on an interactive map and see their own position relative to available study spots."
 git push
 
 # 409434
