@@ -11,18 +11,19 @@ fi
 
 # Execute git commands
 git add .
-git commit -m "feat: Add comprehensive authentication UI with GetX integration
+git commit -m "feat: Implement core StudySpot application structure
 
-- Create LoginScreen with email/password fields, social login options, and remember me functionality
-- Implement RegisterScreen with complete user registration form and validation
-- Develop AuthController using GetX for state management, form validation, and Firebase integration
-- Add password visibility toggle for improved user experience
-- Implement social login buttons with consistent styling
-- Create responsive form fields with proper validation feedback
-- Add navigation between authentication screens
-- Implement remember me functionality with GetStorage integration
-- Include proper loading states during authentication processes
-- Add form validation with real-time feedback"
+- Add Firebase integration with authentication screens
+- Create responsive home page with Google Maps
+- Implement location-based study spot markers
+- Add study spot data model and service
+- Set up GetX for state management
+- Implement interactive map markers with spot details
+- Create onboarding experience
+- Configure necessary dependencies for maps, auth, and storage
+- Set up project structure following clean architecture principles
+
+This commit establishes the foundation for the StudySpot app with authentication, GPS location detection, and map-based study spot discovery."
 git push
 
 # 409434
