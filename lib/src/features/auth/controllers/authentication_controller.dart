@@ -175,6 +175,7 @@ class AuthController extends GetxController {
         Get.snackbar('Error', 'Login failed: ${e.message}');
       }
     } catch (e) {
+      print('=======< $e');
       Get.snackbar('Error', 'An unexpected error occurred');
     } finally {
       isLoading.value = false;

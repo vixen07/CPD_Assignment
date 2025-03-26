@@ -42,7 +42,7 @@ class ProfileController extends GetxController {
         'Error',
         'Failed to load profile: $e',
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
+        backgroundColor: const Color.fromARGB(255, 208, 107, 99),
         colorText: Colors.white,
       );
     } finally {

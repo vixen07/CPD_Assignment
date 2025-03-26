@@ -40,13 +40,16 @@ dependencies:
   
   flutter_screenutil: ^5.9.3
 
-  firebase_core: ^2.32.0
-  firebase_auth: ^4.16.0
-  firebase_storage: ^11.6.5
-  cloud_firestore: ^4.17.5
+  firebase_core: ^3.12.1  # Matches firebase_storage 11.7.7 and below
+  firebase_auth: ^5.5.1  # Matches Firebase Core 2.x
+  firebase_storage: ^12.4.4
+  cloud_firestore: ^5.6.5  # Matches Firebase Core 2.x
+
+
+  google_sign_in: ^6.3.0
   smooth_page_indicator: ^1.2.1
   google_maps_flutter: ^2.12.0
-  location: ^8.0.0
+  location: ^8.0.0  # Use the latest 7.x version instead of 8.x
   cached_network_image: ^3.4.1
   flutter_svg: ^2.0.17
   image_picker: ^1.1.2

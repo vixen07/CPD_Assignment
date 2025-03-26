@@ -51,7 +51,7 @@ class AppRoutes {
   ];
   
   // Initial route
-  static String get initial => '/home';
+  static String get initial => '/login';
   
   static void configureRoutes() {
   }
