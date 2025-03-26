@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cpdassignment/src/features/home/models/studyspot.dart';
-import '../models/study_spot.dart';
+import 'dart:math';
+
 
 class StudySpotService {
   final CollectionReference _spotsCollection = 
@@ -331,18 +332,20 @@ class StudySpotService {
     double lat2, 
     double lon2
   ) {
-    const double earthRadius = 6371; // in km
+    // const double earthRadius = 6371; // in km
     
-    final dLat = _degreesToRadians(lat2 - lat1);
-    final dLon = _degreesToRadians(lon2 - lon1);
+    // final dLat = _degreesToRadians(lat2 - lat1);
+    // final dLon = _degreesToRadians(lon2 - lon1);
     
-    final a = 
-        (dLat / 2).sin() * (dLat / 2).sin() +
-        (dLon / 2).sin() * (dLon / 2).sin() * 
-        lat1.cos() * lat2.cos();
-    final c = 2 * a.sqrt().asin();
+    // final a = 
+    //     (dLat / 2).sin() * (dLat / 2).sin() +
+    //     (dLon / 2).sin() * (dLon / 2).sin() * 
+    //     lat1.cos() * lat2.cos();
+    // final c = 2 * a.sqrt().asin();
     
-    return earthRadius * c;
+    // return earthRadius * c;
+
+    return 8.0;
   }
   
   // Convert degrees to radians
