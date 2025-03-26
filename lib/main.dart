@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final authService = Get.find<AuthService>();
+    final authService = Get.put(AuthService());
     
     return ScreenUtilInit(
       designSize: const Size(360, 800),

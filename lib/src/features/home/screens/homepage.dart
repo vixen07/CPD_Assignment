@@ -13,6 +13,7 @@ class HomeScreen extends StatelessWidget {
     final controller = Get.put(HomeController());
     
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Obx(() {
         if (controller.isLoading.value) {
           return const Center(child: CircularProgressIndicator());

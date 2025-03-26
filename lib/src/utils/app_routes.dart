@@ -48,46 +48,11 @@ class AppRoutes {
       name: '/search',
       page: () => SearchScreen(),
     ),
-    // GetPage(
-    //   name: '/history',
-    //   page: () => FavoritesScreen(), // Placeholder - would be actual History screen
-    // ),
-    // GetPage(
-    //   name: '/reviews',
-    //   page: () => FavoritesScreen(), // Placeholder - would be actual Reviews screen
-    // ),
-    // GetPage(
-    //   name: '/my-spots',
-    //   page: () => FavoritesScreen(), // Placeholder - would be actual My Spots screen
-    // ),
-    // GetPage(
-    //   name: '/notifications',
-    //   page: () => FavoritesScreen(), // Placeholder - would be actual Notifications screen
-    // ),
-    // GetPage(
-    //   name: '/privacy',
-    //   page: () => FavoritesScreen(), // Placeholder - would be actual Privacy screen
-    // ),
-    // GetPage(
-    //   name: '/help',
-    //   page: () => FavoritesScreen(), // Placeholder - would be actual Help screen
-    // ),
-    // GetPage(
-    //   name: '/about',
-    //   page: () => FavoritesScreen(), // Placeholder - would be actual About screen
-    // ),
-    // GetPage(
-    //   name: '/forgot-password',
-    //   page: () => FavoritesScreen(), // Placeholder - would be actual Forgot Password screen
-    // ),
   ];
   
   // Initial route
-  static String get initial => '/';
+  static String get initial => '/home';
   
-  // Route guards
   static void configureRoutes() {
-    // Add route middleware here if needed
-    // For example, authentication checks
   }
 }
