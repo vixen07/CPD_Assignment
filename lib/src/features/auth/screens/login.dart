@@ -1,12 +1,12 @@
 import 'package:cpdassignment/src/features/auth/controllers/authentication_controller.dart';
+import 'package:cpdassignment/src/utils/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
-
+    LoginScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     // Get the AuthController instance

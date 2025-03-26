@@ -11,7 +11,12 @@ fi
 
 # Execute git commands
 git add .
-git commit -m "🔒 Fixed Firestore permissions – Allowed authenticated users to read/write study spots"
+git commit -m "Add default and named constructors to AuthController for flexible initialization
+
+- Added default constructor to initialize AuthService internally.
+- Added named constructor to allow injecting custom AuthService instance.
+- Enables flexible controller instantiation via Get.put().
+"
 git push
 
 # 409434

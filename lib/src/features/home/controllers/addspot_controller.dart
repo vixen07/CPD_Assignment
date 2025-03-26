@@ -3,7 +3,7 @@ import 'package:cpdassignment/src/features/home/models/studyspot.dart';
 import 'package:cpdassignment/src/features/home/service/studyspot_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:location/location.dart';
@@ -114,22 +114,39 @@ class AddSpotController extends GetxController {
   }
   
   // Upload image to Firebase Storage
-  Future<String> _uploadImage() async {
-    if (selectedImageFile == null) {
-      return '';
-    }
-    
-    try {
-      final fileName = '${DateTime.now().millisecondsSinceEpoch}.jpg';
-      final reference = _storage.ref().child('study_spots/$fileName');
-      final uploadTask = reference.putFile(selectedImageFile!);
-      final snapshot = await uploadTask;
-      return await snapshot.ref.getDownloadURL();
-    } catch (e) {
-      print('Error uploading image: $e');
-      throw Exception('Failed to upload image');
-    }
+final FirebaseDatabase _database = FirebaseDatabase.instance; // Initialize Realtime Database
+
+Future<String> _uploadImage() async {
+  if (selectedImageFile == null) {
+    return ''; // If no image is selected, return an empty string
   }
+
+  try {
+    final fileName = '${DateTime.now().millisecondsSinceEpoch}.jpg';
+    final storageRef = _storage.ref('study_spots/$fileName');
+
+    print('Uploading to: study_spots/$fileName');
+
+    // Upload the file to Firebase Storage
+    final uploadTask = await storageRef.putFile(selectedImageFile!);
+    final snapshot =  uploadTask;
+    final imageUrl = await snapshot.ref.getDownloadURL(); // Get download URL
+
+    print('Image uploaded successfully: $imageUrl');
+
+    // Save URL to Firebase Realtime Database
+    final DatabaseReference dbRef = _database.ref().child('study_spots'); 
+    await dbRef.push().set({'imageUrl': imageUrl, 'uploadedAt': DateTime.now().toIso8601String()});
+
+    print('Image URL saved to Realtime Database');
+
+    return imageUrl; // Return the image URL as expected
+
+  } catch (e) {
+    print('Error uploading image: $e');
+    throw Exception('Failed to upload image');
+  }
+}
   
   // Pick location from map
   void pickLocation() async {
@@ -253,9 +270,9 @@ class AddSpotController extends GetxController {
       
       // Upload image if selected
       String imageUrl = '';
-      if (selectedImageFile != null) {
-        imageUrl = await _uploadImage();
-      }
+      // if (selectedImageFile != null) {
+      //   imageUrl = await _uploadImage();
+      // }
       
       // Parse price and capacity
       double price = 0.0;
