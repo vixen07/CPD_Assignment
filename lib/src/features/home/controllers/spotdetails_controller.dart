@@ -1,5 +1,6 @@
 import 'package:cpdassignment/src/features/home/models/studyspot.dart';
 import 'package:cpdassignment/src/features/home/service/studyspot_service.dart';
+import 'package:cpdassignment/src/utils/notofication_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -98,6 +99,8 @@ class SpotDetailsController extends GetxController {
       // Add like
       likedSpots.add(spot.id);
       isLiked.value = true;
+       Get.find<NotificationService>().showLikeNotification(spot);
+    
       Get.snackbar(
         'Liked',
         'You liked ${spot.name}',
