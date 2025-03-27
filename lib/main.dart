@@ -2,6 +2,7 @@ import 'package:cpdassignment/src/utils/app_routes.dart';
 import 'package:cpdassignment/src/utils/app_theme.dart';
 import 'package:cpdassignment/src/utils/auth_service.dart';
 import 'package:cpdassignment/src/utils/dependencies_injection.dart';
+import 'package:cpdassignment/src/utils/notofication_service.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,6 +26,13 @@ void main() async {
   
   // Configure routes
   AppRoutes.configureRoutes();
+
+
+    final notificationService = NotificationService();
+  await notificationService.initNotifications();
+  
+  // Register with GetX
+  Get.put(notificationService);
   
   runApp(const MyApp());
 }

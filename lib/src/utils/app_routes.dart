@@ -9,8 +9,12 @@ import 'package:cpdassignment/src/features/home/screens/profile_screen.dart';
 import 'package:cpdassignment/src/features/home/screens/search_screen.dart';
 import 'package:get/get.dart';
 
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class AppRoutes {
+  static final box = GetStorage(); // Initialize GetStorage
+
   static final routes = [
     GetPage(
       name: '/',
@@ -49,10 +53,19 @@ class AppRoutes {
       page: () => SearchScreen(),
     ),
   ];
-  
-  // Initial route
-  static String get initial => '/login';
-  
-  static void configureRoutes() {
+
+  // Determine the initial route dynamically
+  static String get initial {
+    bool? isFirstTime = box.read('onboarding_completed');
+    bool? isLoggedIn = box.read('isLoggedIn');
+
+    if (isFirstTime == null) {
+      box.write('onboarding_completed', true);
+      return '/';
+    } else if (isFirstTime == false && (isLoggedIn == null || isLoggedIn == false)) {
+      return '/login';
+    } else {
+      return '/home';
+    }
   }
 }

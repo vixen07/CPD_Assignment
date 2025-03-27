@@ -54,6 +54,8 @@ dependencies:
   flutter_svg: ^2.0.17
   image_picker: ^1.1.2
   firebase_database: ^11.3.4
+  flutter_local_notifications:
+  timezone:
 
 dev_dependencies:
   flutter_test:
