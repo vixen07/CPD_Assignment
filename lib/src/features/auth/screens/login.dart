@@ -42,6 +42,7 @@ class LoginScreen extends StatelessWidget {
                     
                     Text(
                       'Sign in to continue',
+                      
                       style: TextStyle(
                         fontSize: 16.sp,
                         color: Colors.grey[600],
