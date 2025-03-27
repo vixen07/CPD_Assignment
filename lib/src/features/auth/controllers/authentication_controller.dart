@@ -144,13 +144,10 @@ class AuthController extends GetxController {
   
   // Save credentials if remember me is checked
   void saveCredentials() {
-    if (rememberMe.value) {
-      _storage.write('saved_email', emailController.text);
+     _storage.write('saved_email', emailController.text);
       _storage.write('saved_password', passwordController.text);
-    } else {
-      _storage.remove('saved_email');
-      _storage.remove('saved_password');
-    }
+      _storage.write('isLoggedIn', true);
+
   }
   
   // Login with email and password
