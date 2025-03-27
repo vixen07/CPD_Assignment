@@ -24,8 +24,7 @@ void main() async {
   // Initialize dependencies
   await DependencyInjection.init();
   
-  // Configure routes
-  AppRoutes.configureRoutes();
+
 
 
     final notificationService = NotificationService();
