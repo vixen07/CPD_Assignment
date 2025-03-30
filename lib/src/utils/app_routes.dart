@@ -63,7 +63,7 @@ class AppRoutes {
       box.write('onboarding_completed', true);
       return '/';
     } else if (isFirstTime == false && (isLoggedIn == null || isLoggedIn == false)) {
-      return '/login';
+      return '/home';
     } else {
       return '/home';
     }
