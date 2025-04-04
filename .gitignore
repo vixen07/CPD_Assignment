@@ -49,3 +49,4 @@ app.*.map.json
 .vscode/
 *.iml
 ./git
+git

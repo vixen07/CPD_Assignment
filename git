@@ -11,6 +11,6 @@ fi
 
 # Execute git commands
 git add .
-git commit -m "debug: fix initial route logic based on onboarding_completed and isLoggedIn flags"
+git commit -m "feat(storage): add RLS policy to enable public read access to Supabase storage objects"
 git push
 

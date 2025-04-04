@@ -7,6 +7,9 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:location/location.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+final supabase = Supabase.instance.client;
+final FirebaseDatabase _database = FirebaseDatabase.instance;
 
 
 class AddSpotController extends GetxController {
@@ -118,35 +121,122 @@ final FirebaseDatabase _database = FirebaseDatabase.instance; // Initialize Real
 
 Future<String> _uploadImage() async {
   if (selectedImageFile == null) {
-    return ''; // If no image is selected, return an empty string
+    return ''; // No image selected
   }
 
   try {
+    final bucketName = 'studyspots';
+
+ 
     final fileName = '${DateTime.now().millisecondsSinceEpoch}.jpg';
-    final storageRef = _storage.ref('study_spots/$fileName');
+    final fileBytes = await selectedImageFile!.readAsBytes();
+
+    // Check if the bucket exists, if not, create it
+    try {
+      await supabase.storage.from(bucketName).bucketId;
+    } catch (e) {
+      // Bucket doesn't exist, so create it
+      print('Bucket does not exist, creating bucket...');
+      await supabase.storage.createBucket(
+        bucketName,
+        BucketOptions(public: true), // Set it as public or private as needed
+      );
+      print('Bucket created successfully');
+    }
+
+    // 👇 Upload file to Supabase Storage
+    final storageResponse = await supabase.storage
+        .from(bucketName) // This is your bucket name
+        .uploadBinary(
+          'images/$fileName', // Path inside the bucket
+          fileBytes,
+          fileOptions: const FileOptions(contentType: 'image/jpeg'),
+        );
+
+    if (storageResponse.isEmpty) {
+      throw Exception('Supabase upload failed.');
+    }
+
+    // 👇 Generate public URL
+    final imageUrl = supabase.storage
+        .from(bucketName)
+        .getPublicUrl('images/$fileName');
+
+    print('✅ Image uploaded to Supabase: $imageUrl');
+
+    // 👇 Save to Firebase Realtime Database
+    final DatabaseReference dbRef = _database.ref().child('study_spots');
+    await dbRef.push().set({
+      'imageUrl': imageUrl,
+      'uploadedAt': DateTime.now().toIso8601String(),
+    });
+
+    print('✅ Image URL saved to Realtime Database');
+
+    return imageUrl;
+
+  } catch (e) {
+    print('❌ Error uploading image: $e');
+    throw Exception('Failed to upload image');
+  }
+}
+
+
+
+
+
+
+
+
+Future<String> _uploadImages() async {
+  if (selectedImageFile == null) return '';
+
+  try {
+    final fileName = '${DateTime.now().millisecondsSinceEpoch}.jpg';
+    final storageRef = FirebaseStorage.instance.ref().child('study_spots/$fileName');
 
     print('Uploading to: study_spots/$fileName');
+    print('Selected file: ${selectedImageFile!.path}');
 
-    // Upload the file to Firebase Storage
-    final uploadTask = await storageRef.putFile(selectedImageFile!);
-    final snapshot =  uploadTask;
-    final imageUrl = await snapshot.ref.getDownloadURL(); // Get download URL
+    final uploadTask = storageRef.putFile(selectedImageFile!);
+    final snapshot = await uploadTask.whenComplete(() => {});
+    final imageUrl = await snapshot.ref.getDownloadURL();
 
-    print('Image uploaded successfully: $imageUrl');
+    final dbRef = FirebaseDatabase.instance.ref('study_spots');
+    await dbRef.push().set({
+      'imageUrl': imageUrl,
+      'uploadedAt': DateTime.now().toIso8601String(),
+    });
 
-    // Save URL to Firebase Realtime Database
-    final DatabaseReference dbRef = _database.ref().child('study_spots'); 
-    await dbRef.push().set({'imageUrl': imageUrl, 'uploadedAt': DateTime.now().toIso8601String()});
-
-    print('Image URL saved to Realtime Database');
-
-    return imageUrl; // Return the image URL as expected
-
+    print('Upload successful: $imageUrl');
+    return imageUrl;
   } catch (e) {
     print('Error uploading image: $e');
     throw Exception('Failed to upload image');
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
   // Pick location from map
   void pickLocation() async {
@@ -270,9 +360,9 @@ Future<String> _uploadImage() async {
       
       // Upload image if selected
       String imageUrl = '';
-      // if (selectedImageFile != null) {
-      //   imageUrl = await _uploadImage();
-      // }
+      if (selectedImageFile != null) {
+        imageUrl = await _uploadImage();
+      }
       
       // Parse price and capacity
       double price = 0.0;
