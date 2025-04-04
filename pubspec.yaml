@@ -56,6 +56,7 @@ dependencies:
   firebase_database: ^11.3.4
   flutter_local_notifications:
   timezone:
+  supabase_flutter:
 
 dev_dependencies:
   flutter_test:

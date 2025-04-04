@@ -8,6 +8,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -24,7 +25,10 @@ void main() async {
   // Initialize dependencies
   await DependencyInjection.init();
   
-
+  await Supabase.initialize(
+    url: 'https://slpncriaqirzwazfccpg.supabase.co',
+    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNscG5jcmlhcWlyendhemZjY3BnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM3OTc5ODYsImV4cCI6MjA1OTM3Mzk4Nn0.32C4MlelopK4kYz2NSztkI2OLqpeEpnCSI3g68llVKw',
+  );
 
 
     final notificationService = NotificationService();
